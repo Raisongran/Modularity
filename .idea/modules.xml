@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Blinded.iml" filepath="$PROJECT_DIR$/Blinded.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_audio/gvr_audio.iml" filepath="$PROJECT_DIR$/gvr_audio/gvr_audio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_base/gvr_base.iml" filepath="$PROJECT_DIR$/gvr_base/gvr_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_common/gvr_common.iml" filepath="$PROJECT_DIR$/gvr_common/gvr_common.iml" />
+    </modules>
+  </component>
+</project>
