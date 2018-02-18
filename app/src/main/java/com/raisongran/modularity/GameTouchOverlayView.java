@@ -1,12 +1,10 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.content.Context;
-import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 

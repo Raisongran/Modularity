@@ -1,10 +1,13 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 /**
  * Contains:
@@ -29,6 +32,7 @@ public class GameWorld {
             for (int i = 0; i < jsonProps.length(); i++) {
                 props[i] = new GameProp(jsonProps.getJSONObject(i));
             }
+            System.out.println(Arrays.toString(props));
 
             // - player
             player = new GamePlayer(data.getJSONObject("player"));
@@ -48,7 +52,7 @@ public class GameWorld {
     public void stop() {
         room.stop();
         for(int i=0; i<props.length; i++ ) {
-            props[i].stop();
+            props[i].stopSound();
         }
         player.stop();
     }

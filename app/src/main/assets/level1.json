@@ -6,7 +6,7 @@
     "enclosed": true,
     "props": [
       {
-        "name": "Fire",
+        "name": "Beep",
         "x": 50,
         "y": 50,
         "z": 0,
@@ -17,47 +17,23 @@
           }
         ],
         "sound": {
-          "file": "fire_1.wav",
+          "file": "3.wav",
           "repeat": true
         }
       },
       {
-        "name": "Moving thing",
+        "name": "Music",
         "x": 10,
-        "y": 10,
+        "y": 72,
         "z": 0,
         "behaviours": [
           {
             "when": "onstart",
             "do": "play_sound"
-          },
-          {
-            "when": "ontick",
-            "do": "follow_path",
-            "path": [
-              {
-                "x": 10,
-                "y": 10,
-                "z": 0,
-                "s": 0.75
-              },
-              {
-                "x": 60,
-                "y": 30,
-                "z": 0,
-                "s": 1
-              },
-              {
-                "x": 30,
-                "y": 70,
-                "z": 50,
-                "s": 1
-              }
-            ]
           }
         ],
         "sound": {
-          "file": "puppy_barking.wav",
+          "file": "perc_lp1.mp3",
           "repeat": true
         }
       }
@@ -67,8 +43,8 @@
   ],
   "player": {
     "position": {
-      "x": 50,
-      "y": 10,
+      "x": 30,
+      "y": 30,
       "z": 0
     },
     "direction": 0

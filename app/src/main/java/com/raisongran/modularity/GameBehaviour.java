@@ -1,17 +1,14 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by willbo on 10/07/16.
- */
+
 public class GameBehaviour {
     private enum GAME_BEHAVIOUR_TRIGGERS {
         ONSTART,

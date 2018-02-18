@@ -1,13 +1,10 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.FloatMath;
-import android.util.Log;
 
 import com.google.vr.sdk.audio.GvrAudioEngine;
-import com.google.vr.sdk.base.HeadTransform;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +58,7 @@ public class GamePlayer {
         // collision with room boundary
         if(newX < 0 || newX > room.getWidth() || newY < 0 || newY > room.getDepth()) {
             doMove = false;
-            FeedbackManager.getInstance().vibrate(50);
+            FeedbackManager.getInstance().vibrate(1);
         }
         //TODO: interaction with props
         if(doMove) {

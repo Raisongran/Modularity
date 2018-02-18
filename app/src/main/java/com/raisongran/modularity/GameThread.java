@@ -1,10 +1,5 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
-import android.util.Log;
-
-/**
- * Created by willbo on 09/07/16.
- */
 public class GameThread implements Runnable {
     private boolean doRun;
     private boolean isRunning;

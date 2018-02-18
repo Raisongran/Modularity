@@ -1,16 +1,12 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
 /**
  * Contains:

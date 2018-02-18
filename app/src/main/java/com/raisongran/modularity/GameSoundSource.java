@@ -1,4 +1,4 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.util.Log;
 

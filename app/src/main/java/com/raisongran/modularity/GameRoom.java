@@ -1,4 +1,4 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +22,7 @@ public class GameRoom {
     private float depth;
     private float height;
     private boolean enclosed;
-    private GameProp[] props;
+    public GameProp[] props;
 
     public GameRoom(JSONObject data) {
         try {
@@ -74,7 +74,7 @@ public class GameRoom {
 
     public void stop() {
         for (int i = 0; i < props.length; i++) {
-            props[i].stop();
+            props[i].stopSound();
         }
     }
 

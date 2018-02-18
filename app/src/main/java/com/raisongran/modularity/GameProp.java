@@ -1,4 +1,4 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,14 +8,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by willbo on 09/07/16.
- */
+
 public class GameProp {
     private String name;
-    private float x;
-    private float y;
-    private float z;
+    public float x;
+    public float y;
+    public float z;
     private float direction; // as a bearing
     private GameBehaviour[] behaviours;
     private GameSoundSource sound = null;
@@ -63,7 +61,7 @@ public class GameProp {
         }
     }
 
-    public void stop() {
+    public void stopSound() {
         if(sound != null) {
             sound.stop();
         }

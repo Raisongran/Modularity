@@ -1,20 +1,11 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
-import android.content.Context;
-import android.gesture.Gesture;
-import android.gesture.GestureLibrary;
-import android.gesture.GestureOverlayView;
-import android.gesture.GesturePoint;
-import android.gesture.GestureStroke;
-import android.gesture.Prediction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,5 +42,11 @@ public class MainActivity extends AppCompatActivity {
                 gameManager.stop();
             }
         });
+    }
+
+    public void TestButtonClick(View view) {
+        gameManager.getGameWorld().room.props[0].y += 1;
+        gameManager.getGameWorld().room.props[0].stopSound();
+        gameManager.getGameWorld().room.props[0].playSound();
     }
 }

@@ -1,12 +1,10 @@
-package com.willbroderick.games.blinded;
+package com.raisongran.modularity;
 
 import android.content.Context;
 import android.os.Vibrator;
 import com.google.vr.sdk.audio.GvrAudioEngine;
 
-/**
- * Created by willbo on 09/07/16.
- */
+
 public class FeedbackManager {
     // singleton
     private static FeedbackManager instance = null;
