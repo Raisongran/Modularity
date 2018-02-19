@@ -32,7 +32,6 @@ public class GameWorld {
             for (int i = 0; i < jsonProps.length(); i++) {
                 props[i] = new GameProp(jsonProps.getJSONObject(i));
             }
-            System.out.println(Arrays.toString(props));
 
             // - player
             player = new GamePlayer(data.getJSONObject("player"));

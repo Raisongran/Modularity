@@ -16,7 +16,7 @@ public class GameThread implements Runnable {
         long nextSlowTickTime = 0;
         while(doRun) {
             currTime = System.currentTimeMillis();
-            gameManager.tick( 1.f / (1f * tickInterval / (currTime - prevTime) ) );
+            gameManager.tick(1.f / (1f * tickInterval / (currTime - prevTime)));
             if(currTime > nextSlowTickTime) {
                 gameManager.slowTick();
                 nextSlowTickTime = currTime + slowTickInterval;

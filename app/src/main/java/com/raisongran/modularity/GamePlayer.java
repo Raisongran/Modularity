@@ -22,7 +22,7 @@ public class GamePlayer {
     private float x;
     private float y;
     private float z;
-    private float direction; // as a bearing
+    public float direction; // as a bearing
 
     public GamePlayer(JSONObject data) {
         try {
@@ -77,6 +77,7 @@ public class GamePlayer {
     }
 
     public void start() {
+
     }
 
     public void tick(float dt) {
@@ -90,6 +91,7 @@ public class GamePlayer {
     }
 
     public void stop() {
+
     }
 
     public void drawTo(Canvas canvas) {
@@ -99,9 +101,9 @@ public class GamePlayer {
         paint.setColor(Color.BLACK);
         canvas.drawCircle(0, 0, 10, paint);
         float degrees = direction * 180f / (float)Math.PI;
-        canvas.rotate(degrees);
-        canvas.drawLine(0, 0, 20, 0, paint);
         canvas.rotate(-degrees);
+        canvas.drawLine(0, 0, 20, 0, paint);
+        canvas.rotate(degrees);
         canvas.translate(-x, -y);
     }
 }

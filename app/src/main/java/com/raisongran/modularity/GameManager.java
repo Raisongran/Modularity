@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.google.vr.cardboard.ThreadUtils.runOnUiThread;
+
 /**
  * Contains:
  * - world
