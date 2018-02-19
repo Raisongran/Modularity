@@ -8,7 +8,7 @@
     [
       {
         "name": "Music",
-        "x": 10,
+        "x": 38,
         "y": 72,
         "z": 0,
         "behaviours": [
@@ -18,35 +18,17 @@
           }
         ],
         "sound": {
-          "file": "perc_lp1.mp3",
+          "file": "music1.mp3",
           "repeat": true
         }
       }
     ]
   },
-  "props":
-  [
-      {
-        "name": "Beep",
-        "x": 50,
-        "y": 50,
-        "z": 0,
-        "behaviours": [
-          {
-            "when": "onstart",
-            "do": "play_sound"
-          }
-        ],
-        "sound": {
-          "file": "3.wav",
-          "repeat": true
-        }
-      }
-  ],
+  "props": [],
   "player": {
     "position": {
-      "x": 30,
-      "y": 30,
+      "x": 50,
+      "y": 50,
       "z": 0
     },
     "direction": 0
