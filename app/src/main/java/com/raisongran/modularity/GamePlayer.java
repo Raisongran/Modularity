@@ -23,6 +23,7 @@ public class GamePlayer {
     private float y;
     private float z;
     public float direction; // as a bearing
+    public float playerRotationShift;
 
     public GamePlayer(JSONObject data) {
         try {
@@ -42,7 +43,8 @@ public class GamePlayer {
         } else {
             direction += TURN_SPEED;
         }
-        sanitiseDirection();
+        // direction control is executing by a compass
+        //sanitiseDirection();
     }
 
     public void applyMove(boolean isForward, GameRoom room, GameProp[] props) {
@@ -76,23 +78,18 @@ public class GamePlayer {
         }
     }
 
-    public void start() {
-
-    }
+    public void start() {}
 
     public void tick(float dt) {
         // set position in audio renderer
         GvrAudioEngine engine = FeedbackManager.getInstance().getAudioEngine();
         engine.setHeadPosition(x, y, z);
         // set orientation (as quaternion about Z)
-        engine.setHeadRotation(0f, 0f, 1f, (float) Math.cos(direction));
-        // update
+        engine.setHeadRotation(0f, 0f, (float) Math.sin(direction), 0.5f);
         engine.update();
     }
 
-    public void stop() {
-
-    }
+    public void stop() {}
 
     public void drawTo(Canvas canvas) {
         canvas.translate(x, y);
@@ -100,10 +97,11 @@ public class GamePlayer {
         paint.setStrokeWidth(1f);
         paint.setColor(Color.BLACK);
         canvas.drawCircle(0, 0, 10, paint);
-        float degrees = direction * 180f / (float)Math.PI;
-        canvas.rotate(-degrees);
-        canvas.drawLine(0, 0, 20, 0, paint);
+        //float degrees = direction * 180f / (float)Math.PI + playerRotationShift;
+        float degrees = (float) ((direction * 360) / Math.PI + playerRotationShift);
         canvas.rotate(degrees);
+        canvas.drawLine(0, 0, 20, 0, paint);
+        canvas.rotate(-degrees);
         canvas.translate(-x, -y);
     }
 }
