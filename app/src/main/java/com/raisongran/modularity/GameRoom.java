@@ -80,15 +80,15 @@ public class GameRoom {
 
     public void drawTo(Canvas canvas) {
         // centralise canvas on room
-        canvas.translate(10, 10);
-        float scale = (canvas.getWidth() - 20) / (width);
+        canvas.translate(2, 2);
+        float scale = canvas.getWidth() / width;
         canvas.scale(scale, scale);
         // draw room boundary
         Paint paint = new Paint();
-        paint.setStrokeWidth(1f);
-        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(0.5f);
+        paint.setColor(Color.DKGRAY);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(0, 0, width, depth, paint);
+        canvas.drawRect(0, 0, 16, 16, paint);
         // draw props
         for (int i = 0; i < props.length; i++) {
             props[i].drawTo(canvas);

@@ -19,11 +19,11 @@ import org.json.JSONObject;
 public class GamePlayer {
     private static final float TURN_SPEED = 0.02f;
     private static final float MOVE_SPEED = 0.15f;
-    private float x;
-    private float y;
-    private float z;
+    public float x;
+    public float y;
+    public float z;
     public float direction; // as a bearing
-    public float playerRotationShift;
+    public float playerRotationShift = 271;
 
     public GamePlayer(JSONObject data) {
         try {
@@ -60,7 +60,7 @@ public class GamePlayer {
         // collision with room boundary
         if(newX < 0 || newX > room.getWidth() || newY < 0 || newY > room.getDepth()) {
             doMove = false;
-            FeedbackManager.getInstance().vibrate(1);
+            FeedbackManager.getInstance().vibrate(10);
         }
         //TODO: interaction with props
         if(doMove) {
@@ -92,16 +92,17 @@ public class GamePlayer {
     public void stop() {}
 
     public void drawTo(Canvas canvas) {
-        canvas.translate(x, y);
+        canvas.translate(8, 8);
         Paint paint = new Paint();
-        paint.setStrokeWidth(1f);
-        paint.setColor(Color.BLACK);
-        canvas.drawCircle(0, 0, 10, paint);
+        paint.setStrokeWidth(0.8f);
+        paint.setColor(Color.RED);
+        canvas.drawCircle(0, 0, 1.5f, paint);
         //float degrees = direction * 180f / (float)Math.PI + playerRotationShift;
         float degrees = (float) ((direction * 360) / Math.PI + playerRotationShift);
         canvas.rotate(degrees);
-        canvas.drawLine(0, 0, 20, 0, paint);
+        canvas.drawLine(0, 0, 5, 0, paint);
         canvas.rotate(-degrees);
-        canvas.translate(-x, -y);
+        canvas.drawCircle(x-8, y-8, 8, paint);
+        canvas.drawLine(x-8, y-8, x-8, y-17, paint);
     }
 }
