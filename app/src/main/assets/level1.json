@@ -8,8 +8,8 @@
     [
       {
         "name": "Music",
-        "x": 35,
-        "y": 80,
+        "x": 75,
+        "y": 50,
         "z": 0,
         "behaviours": [
           {
@@ -18,7 +18,7 @@
           }
         ],
         "sound": {
-          "file": "music1.mp3",
+          "file": "fire_1.wav",
           "repeat": true
         }
       }

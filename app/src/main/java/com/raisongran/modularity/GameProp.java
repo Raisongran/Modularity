@@ -72,7 +72,7 @@ public class GameProp {
         // draw self
         Paint paint = new Paint();
         paint.setStrokeWidth(3f);
-        paint.setColor(Color.RED);
+        paint.setColor(Color.DKGRAY);
         canvas.drawCircle(0, 0, 4, paint);
         // draw associated
         for (int i = 0; i < behaviours.length; i++) {
