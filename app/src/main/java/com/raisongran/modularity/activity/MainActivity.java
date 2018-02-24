@@ -1,4 +1,4 @@
-package com.raisongran.modularity;
+package com.raisongran.modularity.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.raisongran.modularity.R;
-import com.raisongran.modularity.FeedbackManager;
-import com.raisongran.modularity.GameManager;
-import com.raisongran.modularity.GameTouchOverlayView;
+import com.raisongran.modularity.environment.FeedbackManager;
+import com.raisongran.modularity.environment.GameManager;
+import com.raisongran.modularity.environment.GameTouchOverlayView;
 
 public class MainActivity extends AppCompatActivity {
 

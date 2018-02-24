@@ -1,4 +1,4 @@
-package com.raisongran.modularity;
+package com.raisongran.modularity.environment;
 
 public class GameThread implements Runnable {
     private boolean doRun;
