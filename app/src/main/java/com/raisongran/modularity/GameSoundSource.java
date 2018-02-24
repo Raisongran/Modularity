@@ -30,7 +30,6 @@ public class GameSoundSource {
         }
     }
 
-    // TODO dynamically sound source position changing
     public void playAt(float x, float y, float z) {
         GvrAudioEngine engine = FeedbackManager.getInstance().getAudioEngine();
         int soundId = engine.createSoundObject(file);
@@ -40,6 +39,17 @@ public class GameSoundSource {
             soundIds.add(soundId);
         } else {
             Log.d("Audio", "Sound not loaded");
+        }
+    }
+
+    public void moveTo(float x, float y, float z) {
+        if(soundIds.size() > 0) {
+            GvrAudioEngine engine = FeedbackManager.getInstance().getAudioEngine();
+
+            for (int i = 0; i < soundIds.size(); i++) {
+                int soundId = soundIds.get(i);
+                engine.setSoundObjectPosition(soundId, x, y, z);
+            }
         }
     }
 

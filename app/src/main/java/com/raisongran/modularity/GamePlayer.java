@@ -49,7 +49,7 @@ public class GamePlayer {
 
     public void applyMove(boolean isForward, GameRoom room, GameProp[] props) {
         float newX, newY;
-        if(isForward) {
+        if (isForward) {
             newX = x + (float)Math.cos(direction) * MOVE_SPEED;
             newY = y + (float)Math.sin(direction) * MOVE_SPEED;
         } else {
@@ -58,12 +58,12 @@ public class GamePlayer {
         }
         boolean doMove = true;
         // collision with room boundary
-        if(newX < 0 || newX > room.getWidth() || newY < 0 || newY > room.getDepth()) {
+        if (newX < 0 || newX > room.getWidth() || newY < 0 || newY > room.getDepth()) {
             doMove = false;
             FeedbackManager.getInstance().vibrate(10);
         }
         //TODO: interaction with props
-        if(doMove) {
+        if (doMove) {
             x = newX;
             y = newY;
         }

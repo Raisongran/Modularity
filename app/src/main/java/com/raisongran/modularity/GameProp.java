@@ -11,10 +11,11 @@ import org.json.JSONObject;
 
 public class GameProp {
     private String name;
-    public float x;
-    public float y;
-    public float z;
-    private float direction; // as a bearing
+    private float x;
+    private float y;
+    private float z;
+    private float direction;
+    public float distance; // as radius
     private GameBehaviour[] behaviours;
     private GameSoundSource sound = null;
 
@@ -41,11 +42,18 @@ public class GameProp {
 
     public void setPosition(float nx, float ny, float nz) {
         x = nx; y = ny; z = nz;
+        moveSound();
     }
 
     public void playSound() {
         if(sound != null) {
             sound.playAt(x, y, z);
+        }
+    }
+
+    private void moveSound() {
+        if(sound != null) {
+             sound.moveTo(x, y, z);
         }
     }
 

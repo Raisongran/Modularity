@@ -4,17 +4,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
-import android.widget.Button;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.raisongran.modularity.processing.LocalMath;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -23,6 +18,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView tView1;
     private TextView tStatus;
     private TextView tCords;
+    private static double alpha = 0.06f;
+
+    LocalMath.SmoothFilter smoothFilter1 = new LocalMath.SmoothFilter();
+    LocalMath.SmoothFilter smoothFilter2 = new LocalMath.SmoothFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +42,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void TestButtonClick(View view) {
-        gameManager.getGameWorld().room.props[0].z -= 1;
-        gameManager.getGameWorld().room.props[0].stopSound();
-        gameManager.getGameWorld().room.props[0].playSound();
+
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        // get the angle around the z-axis rotated
-        float degree = (float) (Math.PI * event.values[0]/360);
-        if (gameManager.getGameWorld() != null){
-            gameManager.getGameWorld().player.direction = degree;
-            tView1.setText("Degree: " + Math.sin(degree));
-            tCords.setText("x = " +  Math.round(gameManager.getGameWorld().player.x) +
-                    "; y = " + Math.round(gameManager.getGameWorld().player.y) +
-                    "; x = " + Math.round(gameManager.getGameWorld().player.z));
+        if (gameManager.getGameWorld() != null) {
+            double raw = event.values[0];
+
+            double angle = 2 * Math.PI * raw / 360;
+            float r = gameManager.getGameWorld().room.props[0].distance;
+            float shiftX = gameManager.getGameWorld().player.x;
+            float shiftY = gameManager.getGameWorld().player.y;
+            float x = (float) (r * smoothFilter1.Get(Math.sin(angle), alpha) + shiftX);
+            float y = (float) (r * smoothFilter2.Get(Math.cos(angle), alpha) + shiftY);
+            float z = gameManager.getGameWorld().player.z;
+            gameManager.getGameWorld().room.props[0].setPosition(x, y, z);
         }
     }
 
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         tStatus.setText("Статус: загрузка...");
         gameManager.loadLevel();
         gameManager.play();
+        gameManager.getGameWorld().room.props[0].distance = 30;
         tStatus.setText("Статус: запущено");
     }
 
