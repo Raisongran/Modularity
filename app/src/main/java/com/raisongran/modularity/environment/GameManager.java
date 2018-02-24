@@ -51,12 +51,12 @@ public class GameManager implements SensorEventListener {
         gameThread.stop();
     }
 
-    public void tick(float dt) {
+    void tick(float dt) {
         gameWorld.tick(dt);
         inputController.tick(dt);
     }
 
-    public void slowTick() {
+    void slowTick() {
         // update minor UI, etc
         inputController.slowTick();
     }

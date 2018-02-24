@@ -46,14 +46,14 @@
             "trigger": "onstart",
             "action": "move_around",
             "parameters": {
-              "speed": 3,
+              "speed": 0.50,
               "angleBias": 50,
-              "distance": 20
+              "distance": 35
             }
           }
         ],
         "sound": {
-          "file": "perc_lp1.mp3",
+          "file": "music2.mp3",
           "repeat": true
         }
       }

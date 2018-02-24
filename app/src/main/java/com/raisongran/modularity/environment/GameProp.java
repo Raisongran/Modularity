@@ -24,26 +24,24 @@ public class GameProp {
     public float x, y, z; // current cords
     private GameBehaviour[] behaviours;
     private GameSoundSource sound = null;
-    private JSONObject propJson;
     private Handler handler = new Handler();
 
     private double _x, _y, _z; // last iteration cords
-    private int _angle = 0;
+    private float _angle = 0, _speed = 3, _r = 20;
 
-    public GameProp(JSONObject mPropJson) {
-        propJson = mPropJson;
+    GameProp(JSONObject mPropJson) {
         try {
-            name = propJson.getString("name");
-            x = propJson.getInt("x");
-            y = propJson.getInt("y");
-            z = propJson.getInt("z");
-            JSONArray behaviourData = propJson.getJSONArray("behaviours");
+            name = mPropJson.getString("name");
+            x = mPropJson.getInt("x");
+            y = mPropJson.getInt("y");
+            z = mPropJson.getInt("z");
+            JSONArray behaviourData = mPropJson.getJSONArray("behaviours");
             behaviours = new GameBehaviour[behaviourData.length()];
             for (int i = 0; i < behaviourData.length(); i++) {
                 behaviours[i] = new GameBehaviour(behaviourData.getJSONObject(i));
             }
-            if (propJson.has("sound")) {
-                sound = new GameSoundSource(propJson.getJSONObject("sound"));
+            if (mPropJson.has("sound")) {
+                sound = new GameSoundSource(mPropJson.getJSONObject("sound"));
             } else {
                 sound = null;
             }
@@ -52,12 +50,12 @@ public class GameProp {
         }
     }
 
-    public void setPosition(float nx, float ny, float nz) {
+    private void setPosition(float nx, float ny, float nz) {
         x = nx; y = ny; z = nz;
         moveSound();
     }
 
-    public void playSound() {
+    private void playSound() {
         if(sound != null) {
             sound.playAt(x, y, z);
         }
@@ -69,7 +67,7 @@ public class GameProp {
         }
     }
 
-    public void start() {
+    void start() {
         for (int i=0; i<behaviours.length; i++) {
             if (Objects.equals(behaviours[i].trigger, "onstart")) {
                 switch (behaviours[i].action) {
@@ -77,7 +75,7 @@ public class GameProp {
                         playSound();
                         break;
                     case "move_around":
-                        moveAround(behaviours[i].parameters);
+                        startMoveAround(behaviours[i].parameters);
                         break;
                     default:
                         break;
@@ -86,9 +84,9 @@ public class GameProp {
         }
     }
 
-    public void tick(float dt) {
+    void tick(float dt) {
         for (int i=0; i<behaviours.length; i++) {
-            if (MainActivity.gameManager.getGameWorld().player != null) {
+            if (MainActivity.gameManager.getGameWorld() != null) {
                 if (Objects.equals(behaviours[i].trigger, "ontick")) {
                     switch (behaviours[i].action) {
                         case "follow_compass":
@@ -127,48 +125,47 @@ public class GameProp {
         this.setPosition(x, y, z);
     }
 
-    private void moveAround(String parametersJson) {
-        float speed = 3f;
-        float angleBias = 0f;
-        float r = 20;
+    private void startMoveAround(String parametersJson) {
         try {
             JSONObject param = new JSONObject(parametersJson);
-            speed = (float) param.getInt("speed");
-            angleBias = (float) param.getInt("angleBias");
-            r = (float) param.getInt("distance");
+            _speed = (float) param.getDouble("speed");
+            _angle = (float) param.getDouble("angleBias");
+            _r = (float) param.getDouble("distance");
         } catch (JSONException e) {
             e.printStackTrace();
             MainActivity.gameManager.stop();
         }
+        handler.postDelayed(runnable, 50);
+    }
 
-        handler.postDelayed(runnable, 100);
-
-        float progressMax = 360 + angleBias;
-        float angle = _angle + angleBias;
+    private void moveAround() {
         float biasX = MainActivity.gameManager.getGameWorld().player.x;
         float biasY = MainActivity.gameManager.getGameWorld().player.y;
         float biasZ = MainActivity.gameManager.getGameWorld().player.z;
-        float x = (float) (r * Math.sin(angle) + biasX);
-        float y = (float) (r * Math.cos(angle) + biasY);
-
+        double angle = 2 * Math.PI * _angle / 360;
+        float x = (float) (_r * Math.sin(angle) + biasX);
+        float y = (float) (_r * Math.cos(angle) + biasY);
         this.setPosition(x, y, biasZ);
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-
-            handler.postDelayed(runnable, 100);
+            _angle += _speed;
+            if (_angle >= 360)
+                _angle = 0;
+            moveAround();
+            handler.postDelayed(runnable, 50);
         }
     };
 
-    public void stopSound() {
+    void stopSound() {
         if(sound != null) {
             sound.stop();
         }
     }
 
-    public void drawTo(Canvas canvas) {
+    void drawTo(Canvas canvas) {
         canvas.translate(x, y);
         // draw self
         Paint paint = new Paint();
