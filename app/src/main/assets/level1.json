@@ -2,23 +2,58 @@
   "room": {
     "x": 100,
     "y": 100,
-    "z": 1000,
+    "z": 100,
     "enclosed": true,
     "props":
     [
       {
-        "name": "Music",
+        "name": "Fire",
         "x": 75,
-        "y": 50,
-        "z": 0,
+        "y": 30,
+        "z": 50,
         "behaviours": [
           {
-            "when": "onstart",
-            "do": "play_sound"
+            "trigger": "onstart",
+            "action": "play_sound",
+            "parameters": {}
+          },
+          {
+            "trigger": "ontick",
+            "action": "follow_compass",
+            "parameters": {
+              "angleBias": 50,
+              "distance": 40
+            }
           }
         ],
         "sound": {
           "file": "fire_1.wav",
+          "repeat": true
+        }
+      },
+      {
+        "name": "Music",
+        "x": 75,
+        "y": 80,
+        "z": 50,
+        "behaviours": [
+          {
+            "trigger": "onstart",
+            "action": "play_sound",
+            "parameters": {}
+          },
+          {
+            "trigger": "ontick",
+            "action": "move_around",
+            "parameters": {
+              "speed": 3,
+              "angleBias": 50,
+              "distance": 20
+            }
+          }
+        ],
+        "sound": {
+          "file": "perc_lp1.mp3",
           "repeat": true
         }
       }
@@ -29,7 +64,7 @@
     "position": {
       "x": 50,
       "y": 50,
-      "z": 0
+      "z": 50
     },
     "direction": 0
   }

@@ -23,12 +23,6 @@
             android:text="Degrees: 0" />
 
         <TextView
-            android:id="@+id/tStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Статус: не запущено" />
-
-        <TextView
             android:id="@+id/tCords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

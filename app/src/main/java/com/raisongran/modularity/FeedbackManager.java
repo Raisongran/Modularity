@@ -9,7 +9,7 @@ public class FeedbackManager {
     // singleton
     private static FeedbackManager instance = null;
     public static FeedbackManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new FeedbackManager();
         }
         return instance;

@@ -1,6 +1,10 @@
 package com.raisongran.modularity;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,41 +12,37 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.google.vr.cardboard.ThreadUtils.runOnUiThread;
-
 /**
  * Contains:
  * - world
  * - start/stop/management
  */
-public class GameManager {
+public class GameManager implements SensorEventListener {
     private GameThread gameThread;
     private GameWorld gameWorld;
     private GameTouchOverlayView inputController;
     private Context context;
+    public double angle;
 
-    public GameManager(Context inContext, GameTouchOverlayView inInputController) {
-        context = inContext;
+    public GameManager(Context mContext, GameTouchOverlayView inInputController) {
+        this.context = mContext;
         gameThread = new GameThread(this);
         inputController = inInputController;
         inputController.init(this);
+
+        SensorManager mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE); assert mSensorManager != null;
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME);
     }
 
     public void loadLevel() {
-        // halt current game
         stop();
-        // unload current game world
         gameWorld = null;
-        // fetch data for new level
         gameWorld = new GameWorld(loadJSONFromAsset("level1.json"));
     }
 
     public void play() {
-        // if not already playing...
-        if(!gameThread.isRunning()) {
-            // get ready...
+        if (!gameThread.isRunning()) {
             gameThread.prepareToStart();
-            // go!
             new Thread(gameThread).start();
         }
     }
@@ -52,7 +52,6 @@ public class GameManager {
     }
 
     public void tick(float dt) {
-        // live game update
         gameWorld.tick(dt);
         inputController.tick(dt);
     }
@@ -89,4 +88,15 @@ public class GameManager {
     public GameWorld getGameWorld() {
         return gameWorld;
     }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (this.getGameWorld() != null) {
+            double raw = event.values[0];
+            angle = 2 * Math.PI * raw / 360;
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {}
 }

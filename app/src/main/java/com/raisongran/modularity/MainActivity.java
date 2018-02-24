@@ -1,37 +1,29 @@
 package com.raisongran.modularity;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.raisongran.modularity.processing.LocalMath;
+import com.raisongran.modularity.R;
+import com.raisongran.modularity.FeedbackManager;
+import com.raisongran.modularity.GameManager;
+import com.raisongran.modularity.GameTouchOverlayView;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity {
 
-    private GameManager gameManager;
-    private SensorManager mSensorManager;
-    private TextView tView1;
-    private TextView tStatus;
-    private TextView tCords;
-    private static double alpha = 0.06f;
-
-    LocalMath.SmoothFilter smoothFilter1 = new LocalMath.SmoothFilter();
-    LocalMath.SmoothFilter smoothFilter2 = new LocalMath.SmoothFilter();
+    public static GameManager gameManager;
+    public static TextView tView1;
+    public static TextView tCords;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tView1 = findViewById(R.id.tView1);
-        tStatus = findViewById(R.id.tStatus);
         tCords = findViewById(R.id.tCords);
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE); assert mSensorManager != null;
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME);
 
         // init the singleton for feedback
         FeedbackManager.getInstance().init(getBaseContext());
@@ -39,42 +31,43 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // Player control UI
         final GameTouchOverlayView gestureOverlayView = findViewById(R.id.gestureOverlayView);
         gameManager = new GameManager(getBaseContext(), gestureOverlayView);
+        handler.postDelayed(runnable, 100);
     }
 
     public void TestButtonClick(View view) {
 
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (gameManager.getGameWorld() != null) {
-            double raw = event.values[0];
+    public void PlayButtonClick(View view) {
+        gameManager.loadLevel();
+        gameManager.play();
+    }
 
-            double angle = 2 * Math.PI * raw / 360;
-            float r = gameManager.getGameWorld().room.props[0].distance;
-            float shiftX = gameManager.getGameWorld().player.x;
-            float shiftY = gameManager.getGameWorld().player.y;
-            float x = (float) (r * smoothFilter1.Get(Math.sin(angle), alpha) + shiftX);
-            float y = (float) (r * smoothFilter2.Get(Math.cos(angle), alpha) + shiftY);
-            float z = gameManager.getGameWorld().player.z;
-            gameManager.getGameWorld().room.props[0].setPosition(x, y, z);
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            tick();
+            handler.postDelayed(runnable, 100);
+        }
+    };
+
+    public void tick() {
+        if (gameManager.getGameWorld() != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    float x = gameManager.getGameWorld().room.props[0].x;
+                    float y = gameManager.getGameWorld().room.props[0].y;
+                    float z = gameManager.getGameWorld().room.props[0].z;
+                    tCords.setText(" X: " + x + "\n\r" + "Y: " + y + "\n\r" + "Z: " + z);
+                    tView1.setText("angle: " + gameManager.angle);
+                }
+            });
+
         }
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {}
-
-    public void PlayButtonClick(View view) {
-        tStatus.setText("Статус: загрузка...");
-        gameManager.loadLevel();
-        gameManager.play();
-        gameManager.getGameWorld().room.props[0].distance = 30;
-        tStatus.setText("Статус: запущено");
-    }
-
     public void StopButtonClick(View view) {
-        tStatus.setText("Статус: остановка...");
         gameManager.stop();
-        tStatus.setText("Статус: не запущено");
     }
 }
