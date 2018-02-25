@@ -152,7 +152,7 @@ public class GameProp {
         @Override
         public void run() {
             _angle += _speed;
-            if (_angle >= 360)
+            if (_angle >= 360 || _angle <= -360)
                 _angle = 0;
             moveAround();
             handler.postDelayed(runnable, 50);

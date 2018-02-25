@@ -3,9 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Modularity.iml" filepath="$PROJECT_DIR$/Modularity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modularity.iml" filepath="$PROJECT_DIR$/Modularity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gvr_audio/gvr_audio.iml" filepath="$PROJECT_DIR$/gvr_audio/gvr_audio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_audio/gvr_audio.iml" filepath="$PROJECT_DIR$/gvr_audio/gvr_audio.iml" />
       <module fileurl="file://$PROJECT_DIR$/gvr_base/gvr_base.iml" filepath="$PROJECT_DIR$/gvr_base/gvr_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_base/gvr_base.iml" filepath="$PROJECT_DIR$/gvr_base/gvr_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gvr_common/gvr_common.iml" filepath="$PROJECT_DIR$/gvr_common/gvr_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/gvr_common/gvr_common.iml" filepath="$PROJECT_DIR$/gvr_common/gvr_common.iml" />
     </modules>
   </component>

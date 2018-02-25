@@ -46,7 +46,7 @@
             "trigger": "onstart",
             "action": "move_around",
             "parameters": {
-              "speed": 0.50,
+              "speed": -0.50,
               "angleBias": 50,
               "distance": 35
             }
