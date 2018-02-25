@@ -4,17 +4,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class GameBehaviour {
-
-    public String trigger;
-    public String action;
-    public String parameters;
+class GameBehaviour {
+    String trigger;
+    String action;
+    String properties;
 
     GameBehaviour(JSONObject data) {
         try {
             trigger = data.getString("trigger");
             action = data.getString("action");
-            parameters = data.getString("parameters");
+            properties = data.getString("properties");
         } catch(JSONException ex) {
             ex.printStackTrace();
         }

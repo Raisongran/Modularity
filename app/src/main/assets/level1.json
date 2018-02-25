@@ -11,6 +11,12 @@
         "x": 75,
         "y": 30,
         "z": 50,
+        "colour": {
+          "alpha": 255,
+          "red": 193,
+          "green": 160,
+          "blue": 70
+        },
         "behaviours": [
           {
             "trigger": "onstart",
@@ -20,8 +26,8 @@
           {
             "trigger": "ontick",
             "action": "follow_compass",
-            "parameters": {
-              "angleBias": 50,
+            "properties": {
+              "angle_bias": 50,
               "distance": 40
             }
           }
@@ -36,19 +42,26 @@
         "x": 75,
         "y": 80,
         "z": 50,
+        "colour": {
+          "alpha": 200,
+          "red": 102,
+          "green": 204,
+          "blue": 10
+        },
         "behaviours": [
           {
             "trigger": "onstart",
             "action": "play_sound",
-            "parameters": {}
+            "properties": {}
           },
           {
             "trigger": "onstart",
             "action": "move_around",
-            "parameters": {
-              "speed": -0.50,
-              "angleBias": 50,
-              "distance": 35
+            "properties": {
+              "speed": 0.65,
+              "angle_bias": 50,
+              "distance": 35,
+              "noise_max": 60
             }
           }
         ],
