@@ -24,7 +24,7 @@ public class GameRoom {
     private boolean enclosed;
     public GameProp[] props;
 
-    public GameRoom(JSONObject data) {
+    GameRoom(JSONObject data) {
         try {
             width = (float) data.getInt("x");
             depth = (float) data.getInt("y");
@@ -40,15 +40,15 @@ public class GameRoom {
         }
     }
 
-    public float getWidth() {
+    float getWidth() {
         return width;
     }
 
-    public float getDepth() {
+    float getDepth() {
         return height;
     }
 
-    public void buildAudioEnvironment() {
+    void buildAudioEnvironment() {
         GvrAudioEngine engine = FeedbackManager.getInstance().getAudioEngine();
         engine.setRoomProperties(
                 width,
@@ -60,35 +60,35 @@ public class GameRoom {
         engine.enableRoom(enclosed);
     }
 
-    public void start() {
+    void start() {
         for (int i = 0; i < props.length; i++) {
             props[i].start();
         }
     }
 
-    public void tick(float dt) {
+    void tick(float dt) {
         for (int i = 0; i < props.length; i++) {
             props[i].tick(dt);
         }
     }
 
-    public void stop() {
+    void stop() {
         for (int i = 0; i < props.length; i++) {
             props[i].stopSound();
         }
     }
 
-    public void drawTo(Canvas canvas) {
+    void drawTo(Canvas canvas) {
         // centralise canvas on room
-        canvas.translate(2, 2);
+        canvas.translate(0.2f, 0.2f);
         float scale = canvas.getWidth() / width;
         canvas.scale(scale, scale);
         // draw room boundary
         Paint paint = new Paint();
-        paint.setStrokeWidth(0.5f);
+        paint.setStrokeWidth(0.05f);
         paint.setColor(Color.DKGRAY);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(0, 0, 16, 16, paint);
+        canvas.drawRect(0, 0, 1.6f, 1.6f, paint);
         // draw props
         for (int i = 0; i < props.length; i++) {
             props[i].drawTo(canvas);

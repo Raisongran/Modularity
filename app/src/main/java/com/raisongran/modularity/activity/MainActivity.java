@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     float x = gameManager.getGameWorld().room.props[0].x;
                     float y = gameManager.getGameWorld().room.props[0].y;
                     float z = gameManager.getGameWorld().room.props[0].z;
-                    tCords.setText(" X: " + x + "\n\r" + "Y: " + y + "\n\r" + "Z: " + z);
+                    //tCords.setText(" X: " + x + "\n\r" + "Y: " + y + "\n\r" + "Z: " + z);
                     tView1.setText("angle: " + gameManager.angle);
                 }
             });

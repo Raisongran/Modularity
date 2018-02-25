@@ -14,10 +14,10 @@ import org.json.JSONObject;
  */
 public class GameWorld {
     public GameRoom room;
-    public GameProp[] props;
-    public GamePlayer player;
+    private GameProp[] props;
+    GamePlayer player;
 
-    public GameWorld(JSONObject data) {
+    GameWorld(JSONObject data) {
         try {
             // - room
             room = new GameRoom(data.getJSONObject("room"));
@@ -37,7 +37,7 @@ public class GameWorld {
         }
     }
 
-    public void start() {
+    void start() {
         room.start();
         for(int i=0; i<props.length; i++ ) {
             props[i].start();
@@ -45,7 +45,7 @@ public class GameWorld {
         player.start();
     }
 
-    public void stop() {
+    void stop() {
         room.stop();
         for(int i=0; i<props.length; i++ ) {
             props[i].stopSound();
@@ -53,7 +53,7 @@ public class GameWorld {
         player.stop();
     }
 
-    public void tick(float dt) {
+    void tick(float dt) {
         room.tick(dt);
         for(int i=0; i<props.length; i++ ) {
             props[i].tick(dt);
@@ -61,7 +61,7 @@ public class GameWorld {
         player.tick(dt);
     }
 
-    public void drawTo(Canvas canvas) {
+    void drawTo(Canvas canvas) {
         room.drawTo(canvas);
         for(int i=0; i<props.length; i++ ) {
             props[i].drawTo(canvas);
@@ -69,7 +69,7 @@ public class GameWorld {
         player.drawTo(canvas);
     }
 
-    public void applyInput(GameTouchOverlayView.GAME_PLAYER_CONTROL_STATE controlState) {
+    void applyInput(GameTouchOverlayView.GAME_PLAYER_CONTROL_STATE controlState) {
         switch (controlState) {
             case TURN_LEFT:
                 player.applyTurn(true);

@@ -19,13 +19,12 @@ import org.json.JSONObject;
 public class GamePlayer {
     private static final float TURN_SPEED = 0.02f;
     private static final float MOVE_SPEED = 0.15f;
-    public float x;
-    public float y;
-    public float z;
-    public float direction; // as a bearing
-    public float playerRotationShift = 271;
+    float x;
+    float y;
+    float z;
+    private float direction; // as a bearing
 
-    public GamePlayer(JSONObject data) {
+    GamePlayer(JSONObject data) {
         try {
             JSONObject positionData = data.getJSONObject("position");
             x = positionData.getInt("x");
@@ -37,7 +36,7 @@ public class GamePlayer {
         }
     }
 
-    public void applyTurn(boolean isLeft) {
+    void applyTurn(boolean isLeft) {
         if(isLeft) {
             direction -= TURN_SPEED;
         } else {
@@ -47,7 +46,7 @@ public class GamePlayer {
         //sanitiseDirection();
     }
 
-    public void applyMove(boolean isForward, GameRoom room, GameProp[] props) {
+    void applyMove(boolean isForward, GameRoom room, GameProp[] props) {
         float newX, newY;
         if (isForward) {
             newX = x + (float)Math.cos(direction) * MOVE_SPEED;
@@ -78,9 +77,9 @@ public class GamePlayer {
         }
     }
 
-    public void start() {}
+    void start() {}
 
-    public void tick(float dt) {
+    void tick(float dt) {
         // set position in audio renderer
         GvrAudioEngine engine = FeedbackManager.getInstance().getAudioEngine();
         engine.setHeadPosition(x, y, z);
@@ -89,20 +88,21 @@ public class GamePlayer {
         engine.update();
     }
 
-    public void stop() {}
+    void stop() {}
 
-    public void drawTo(Canvas canvas) {
-        canvas.translate(8, 8);
+    void drawTo(Canvas canvas) {
+        canvas.translate(0.8f, 0.8f);
         Paint paint = new Paint();
-        paint.setStrokeWidth(0.8f);
+        paint.setStrokeWidth(0.08f);
         paint.setColor(Color.RED);
-        canvas.drawCircle(0, 0, 1.5f, paint);
+        canvas.drawCircle(0, 0, 0.15f, paint);
         //float degrees = direction * 180f / (float)Math.PI + playerRotationShift;
+        float playerRotationShift = 271;
         float degrees = (float) ((direction * 360) / Math.PI + playerRotationShift);
         canvas.rotate(degrees);
-        canvas.drawLine(0, 0, 5, 0, paint);
+        canvas.drawLine(0f, 0f, 0.5f, 0f, paint);
         canvas.rotate(-degrees);
-        canvas.drawCircle(x-8, y-8, 8, paint);
-        canvas.drawLine(x-8, y-8, x-8, y-17, paint);
+        canvas.drawCircle(x-0.8f, y-0.8f, 0.8f, paint);
+        canvas.drawLine(x-0.8f, y-0.8f, x-0.8f, y-0.25f, paint);
     }
 }

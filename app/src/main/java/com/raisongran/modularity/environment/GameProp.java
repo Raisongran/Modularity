@@ -186,9 +186,9 @@ public class GameProp {
         canvas.translate(x, y);
         // draw self
         Paint paint = new Paint();
-        paint.setStrokeWidth(3f);
+        paint.setStrokeWidth(0.3f);
         paint.setColor(Color.argb(colour[0], colour[1], colour[2], colour[3]));
-        canvas.drawCircle(0, 0, 4, paint);
+        canvas.drawCircle(0, 0, 0.4f, paint);
         // draw associated
         canvas.translate(-x, -y);
     }

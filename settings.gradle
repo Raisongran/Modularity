@@ -1,1 +1,1 @@
-include ':app', ':gvr_common', ':gvr_base', ':gvr_audio'
+include ':app'

@@ -37,7 +37,7 @@ public class GameManager implements SensorEventListener {
     public void loadLevel() {
         stop();
         gameWorld = null;
-        gameWorld = new GameWorld(loadJSONFromAsset("level1.json"));
+        gameWorld = new GameWorld(loadJSONFromAsset("workspaces/ws_1.json"));
     }
 
     public void play() {

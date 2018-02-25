@@ -1,16 +1,16 @@
 {
   "room": {
-    "x": 100,
-    "y": 100,
-    "z": 100,
+    "x": 10,
+    "y": 10,
+    "z": 10,
     "enclosed": true,
     "props":
     [
       {
         "name": "Fire",
-        "x": 75,
-        "y": 30,
-        "z": 50,
+        "x": 7.5,
+        "y": 3.0,
+        "z": 5.0,
         "colour": {
           "alpha": 255,
           "red": 193,
@@ -21,27 +21,27 @@
           {
             "trigger": "onstart",
             "action": "play_sound",
-            "parameters": {}
+            "properties": {}
           },
           {
             "trigger": "ontick",
             "action": "follow_compass",
             "properties": {
               "angle_bias": 50,
-              "distance": 40
+              "distance": 4.0
             }
           }
         ],
         "sound": {
-          "file": "fire_1.wav",
+          "file": "sounds/effects/fire_1.wav",
           "repeat": true
         }
       },
       {
         "name": "Music",
-        "x": 75,
-        "y": 80,
-        "z": 50,
+        "x": 7.5,
+        "y": 8.0,
+        "z": 5.0,
         "colour": {
           "alpha": 200,
           "red": 102,
@@ -60,13 +60,13 @@
             "properties": {
               "speed": 0.65,
               "angle_bias": 50,
-              "distance": 35,
-              "noise_max": 60
+              "noise_max": 60,
+              "distance": 3.5
             }
           }
         ],
         "sound": {
-          "file": "music2.mp3",
+          "file": "sounds/music/music1.mp3",
           "repeat": true
         }
       }
@@ -75,9 +75,9 @@
   "props": [],
   "player": {
     "position": {
-      "x": 50,
-      "y": 50,
-      "z": 50
+      "x": 5.0,
+      "y": 5.0,
+      "z": 5.0
     },
     "direction": 0
   }
